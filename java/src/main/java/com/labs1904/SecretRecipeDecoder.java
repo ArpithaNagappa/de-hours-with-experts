@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import com.labs1904.Ingredient;
 
 public class SecretRecipeDecoder {
     private static Map<String, String> ENCODING = new HashMap<String, String>() {
@@ -62,8 +63,8 @@ public class SecretRecipeDecoder {
         String[] letters = str.split("");
 
         for (String x : letters) {
-            if (map.containsKey(x)) {
-                output = output + map.get(x);
+            if (ENCODING.containsKey(x)) {
+                output = output + ENCODING.get(x);
             }
             else {
                 output = output + x;
@@ -103,7 +104,7 @@ public class SecretRecipeDecoder {
             String line;
             while ((line = reader.readLine()) != null) {
                 // Process the line here
-                Ingredient processedLine = new decodeIngredient(line);
+                Ingredient processedLine = decodeIngredient(line);
                 // Write the processed line to the output file
                 writer.write(processedLine.getAmount() + " " + processedLine.getDescription());
                 writer.newLine();
